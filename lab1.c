@@ -218,8 +218,8 @@ void free_res_search(strsearch* memory)
 void tests()
 {
     int i;
-    line_param str1, str2, str3, str4;
-    line_param *str1_new, *str2_new, *str3_new, *str4_new;
+    string str1, str2, str3, str4;
+    string *str1_new, *str2_new, *str3_new, *str4_new;
     str1.number = 5;
     str2.number = 3;
     str3.number = 2;
