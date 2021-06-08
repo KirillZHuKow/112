@@ -214,6 +214,75 @@ void free_res_search(strsearch* memory)
 {
     free(memory);
 }
+//тестирование
+void tests()
+{
+    int i;
+    line_param str1, str2, str3, str4;
+    line_param *str1_new, *str2_new, *str3_new, *str4_new;
+    str1.number = 5;
+    str2.number = 3;
+    str3.number = 2;
+    str4.number = 5;
+    str1.begin_str = (char*)malloc(str1.number*sizeof(char));
+    str2.begin_str = (char*)malloc(str2.number*sizeof(char));
+    str3.begin_str = (char*)malloc(str3.number*sizeof(char));
+    str4.begin_str = (char*)malloc(str4.number*sizeof(char));
+    *(char*)str1.begin_str = 'q';
+    *(char*)(str1.begin_str + 1) = 'w';
+    *(char*)(str1.begin_str + 2) = 'e';
+    *(char*)(str1.begin_str + 3) = 'r';
+    *(char*)(str1.begin_str + 4) = 't';
+    *(char*)str2.begin_str= 'q';
+    *(char*)(str2.begin_str + 1) = 'w';
+    *(char*)(str2.begin_str + 2) = 'e';
+    *(char*)str3.begin_str = 'r';
+    *(char*)(str3.begin_str + 1) = 't';
+    *(char*)str4.begin_str = 'z';
+    *(char*)(str4.begin_str + 1) = 'w';
+    *(char*)(str4.begin_str + 2) = 'x';
+    *(char*)(str4.begin_str + 3) = 'r';
+    *(char*)(str4.begin_str + 4) = 'c';
+    str1_new = concatenation(&str2, &str3);
+    assert(str1_new->number == str1.number);
+    for(i = 0;i<str1.number;i++)
+    {
+        assert(*(char*)(str1.begin_str+i) == *(char*)(str1_new->begin_str+i));
+    }
+    str2_new = get_substring(1, 3, &str1);
+    assert(str2_new->number == str2.number);
+    for(i = 0;i<str2.number;i++)
+    {
+        assert(*(char*)(str2.begin_str+i) == *(char*)(str2_new->begin_str+i));
+    }
+    str3_new = get_substring(4, 5, &str1);
+    assert(str3_new->number == str3.number);
+    for(i = 0;i<str3.number;i++)
+    {
+        assert(*(char*)(str3.begin_str+i) == *(char*)(str3_new->begin_str+i));
+    }
+    rule_transcode rule1;
+    rule1.amount = 3;
+    rule1.number = (int*)malloc(rule1.amount*sizeof(int));
+    rule1.symbol = (char*)malloc(rule1.amount*sizeof(char));
+    *(char*)rule1.symbol = 'z';
+    *(char*)(rule1.symbol + 1) = 'x';
+    *(char*)(rule1.symbol + 2) = 'c';
+    *rule1.number = 1;
+    *(rule1.number + 1) = 3;
+    *(rule1.number + 2) = 5;
+    str4_new = transcoding_strings(&str1, &rule1);
+    assert(str4_new->number == str4.number);
+    for(i = 0;i<str4.number;i++)
+    {
+        assert(*(char*)(str4.begin_str+i) == *(char*)(str4_new->begin_str+i));
+    }
+    freeing_line_par(str1_new);
+    freeing_line_par(str2_new);
+    freeing_line_par(str3_new);
+    freeing_line_par(str4_new);
+}
+
 
 
 
